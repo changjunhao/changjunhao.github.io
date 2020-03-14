@@ -218,3 +218,9 @@ section article {
     text-align: center;
     font-size: 30px;
 }
+.copyright-text {
+    position: absolute;
+    bottom: 40px;
+    text-align: center;
+    width: 100%;
+}
