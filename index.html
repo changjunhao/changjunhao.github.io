@@ -1,134 +1,174 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>常君豪 - I am Here</title>
-  <link href="stylesheets/normalize.css" rel="stylesheet">
-  <link href="stylesheets/style.css" rel="stylesheet">
-  <!--[if lt IE 9]>
-  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>CHANG.JH — Building logic with code, capturing the world with light.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.cn">
+  <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
+  <link href="https://fonts.googleapis.cn/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
-  <section id="intro">
-    <h1 id="name">
-      <a href="https://changjunhao.github.io">常 君 豪</a>
-    </h1>
-    <article class="clear">
-      <div id="intro-icon">
-        <a class="link" href="http://weibo.com/zennew" id="link-weibo" target="_blank" title="微博">微博</a>
-        <a class="link" href="https://github.com/changjunhao" id="link-github" target="_blank" title="GitHub">GitHub</a>
-        <a class="link" href="http://blog.ifable.cn" id="link-blog" target="_blank" title="Blog">Blog</a>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav__wordmark">CHANG.JH</a>
+  <ul class="nav__links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#photography">Photography</a></li>
+    <li><a href="#contact" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="canvas-wrapper">
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/landscape/hero.webp" alt="Landscape photography">
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__kicker">CODE / LIGHT — A PERSONAL ARCHIVE</p>
+      <h1 class="hero__headline">Building logic with code,</h1>
+      <h1 class="hero__headline hero__headline--accent">capturing the world with light.</h1>
+      <p class="hero__subtitle">前端工程师 · 风光与人像摄影爱好者。<br>在严谨的架构与感性的光影之间，寻找表达的平衡。</p>
+      <div class="hero__cta">
+        <a href="#photography" class="btn-primary">View Photography</a>
+        <a href="#contact" class="btn-link">Get in touch &rarr;</a>
       </div>
-      <ul class="info">
-        <li><span>姓名</span> | 常君豪</li>
-        <li><span>出生日期</span> | 1992-02-16</li>
-        <li><span>所在地</span> | 北京 - 海淀</li>
-        <li><span>邮箱</span> | <a href="mailto:&#99;&#104;&#97;&#110;&#103;&#106;&#117;&#110;&#104;&#97;&#111;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#x6d;" hideFocus="true">&#99;&#104;&#97;&#110;&#103;&#106;&#117;&#110;&#104;&#97;&#111;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#x6d;</a></li>
-        <li><span>GitHub</span> | <a href="https://github.com/changjunhao" target="_blank">点击进入</a> </li>
-        <li><span>Linkedin</span> | <a href="https://cn.linkedin.com/in/ifable" target="_blank">点击进入</a></li>
-        <li><span>Blog</span> | <a href="http://blog.ifable.cn" target="_blank">点击进入</a></li>
-      </ul>
-      <div class="experience">
-        <p>我喜欢研究所碰到的各种技术，不给自己设边界，有 Geek 精神。<br>我有时间概念，能在约定时间内保证完成任务。</p>
-        <p>熟悉 HTML、CSS、Javascript，能熟练开发符合 W3C 标准的页面，熟练使用 jQuery 框架。<br>
-          有良好的编码习惯。<br>
-          有 Java 基础，对服务器端开发有一定了解，能够配合程序员完成相关工作。<br>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section reveal" id="about">
+    <div class="section__header">
+      <p class="section__kicker">01 — ABOUT</p>
+      <h2 class="section__title">Developer, observer.</h2>
+    </div>
+    <div class="about__grid">
+      <div class="about__text">
+        <span class="about__mono-label">// SELF</span>
+        <h3 class="about__heading">在代码与镜头之间，找到同一种秩序。</h3>
+        <p class="about__paragraph">
+          我是常君豪，一名前端工程师，也是一名摄影爱好者。白天构建数字产品与界面系统，周末带着相机去山里等一场日出，或在城市街头捕捉转瞬即逝的光线。
         </p>
+        <p class="about__paragraph">
+          编程教会我用系统化的思维拆解复杂问题，摄影则让我学会在混沌中等待决定性瞬间。两者看似理性与感性的对立，实则共享同一种底层逻辑：对结构的敏感、对细节的偏执、以及对「恰到好处」的追求。
+        </p>
+        <div class="about__tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Design Systems</span>
+        </div>
       </div>
-    </article>
-    <div class="next">
-      <a href="#" hidefocus="true"></a>
     </div>
   </section>
-  <section id="skill" class="hidden">
-    <h1 >专 业 技 能</h1>
-    <article class="skills clear">
-      <ul class="skill-lang">
-        <li>语言</li>
-        <li>HTML(5)</li>
-        <li>CSS(3)</li>
-        <li>Javascript</li>
-        <li>Java</li>
-        <li>SQL</li>
-      </ul>
-      <ul class="skill-template">
-        <li>模版引擎</li>
-        <li>Jade</li>
-        <li>EJS</li>
-      </ul>
-      <ul class="skill-frame">
-        <li>框架</li>
-        <li>jQuery</li>
-        <li>Vue.js</li>
-      </ul>
-      <ul class="skill-tech">
-        <li>技术</li>
-        <li>Git</li>
-        <li>SVN</li>
-        <li>Ajax</li>
-      </ul>
-    </article>
-    <div class="prev">
-      <a href="#" hidefocus="true"></a>
+
+  <!-- Photography -->
+  <section class="section reveal" id="photography">
+    <div class="section__header">
+      <p class="section__kicker">02 — PHOTOGRAPHY</p>
+      <h2 class="section__title">Light and shadow.</h2>
     </div>
-    <div class="next">
-      <a href="#" hidefocus="true"></a>
-    </div>
-  </section>
-  <section id="works" class="hidden">
-    <h1>最 新 作 品</h1>
-    <article>
-      <ul class="works-list">
-        <li class="works-item" id="invite-panel">
-          <div class="works-logo"></div>
-          <h3 class="works-title"><a href="https://ifable.cn/works/new/invite" target="_blank">知乎邀请面板</a></h3>
-          <p class="works-intro">按照知乎邀请面板实现其外观与功能：邀请按钮有「邀请」和「收回」两个状态；
-            邀请或收回时，更新上方的 「您已邀请 x 等 n 人」的链接和文字。更多说明请查看：</p>
-          <p>GitHub：
-            <a href="https://github.com/changjunhao/invite-panel" target="_blank">
-              github.com/changjunhao/invite-panel
-            </a>
-          </p>
-        </li>
-        <li class="works-item" id="ibook">
-          <div class="works-logo"></div>
-          <h3 class="works-title">iBook图书分享网站</h3>
-          <p class="works-intro">使用node+mongodb搭建。图书信息可使用豆瓣API进行同步，也可自行填写上传。
-            每个用户可对图书和他人评论进行评论和回复，并对不同用户提供了权限管理。更多说明请查看：</p>
-          <p>GitHub：
-            <a href="https://github.com/changjunhao/iBook" target="_blank">
-              github.com/changjunhao/iBook
-            </a>
-          </p>
-        </li>
-      </ul>
-      <div class="works-more">
-        其他作品请<a href="http://blog.ifable.cn/works/" target="_blank">移步</a>
+
+    <!-- Landscape -->
+    <div class="photo-subsection">
+      <h3 class="photo-subsection__title">Landscape</h3>
+      <div class="photo-grid--landscape">
+        <div class="photo-item photo-item--landscape">
+          <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/landscape/a7a898c55b139e347d393348d2e9259f6801fce85d992d1299d744c3ea566760.JPG?x-oss-process=image/resize,w_1440/format,webp/quality,q_85/interlace,1" alt="Landscape photography">
+          <div class="photo-exif">FUJIFILM X-E4 | XF16-80mm F4 R OIS WR | 38mm | f/4.0 | 1/20s | ISO 800</div>
+        </div>
+        <div class="photo-item photo-item--landscape">
+          <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/landscape/5bd58fc0656c994b956a1ae18f92e131eb426e791e5b07cd8f64f72ae469dd5b.JPG?x-oss-process=image/resize,w_1440/format,webp/quality,q_85/interlace,1" alt="Landscape photography">
+          <div class="photo-exif">FUJIFILM X-E4 | XF16-80mm F4 R OIS WR | 59mm | f/8.0 | 1/500s | ISO 160</div>
+        </div>
+        <div class="photo-item photo-item--landscape">
+          <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/landscape/7dc0089c20cb5144c2dff6344d731c42d33508a135eece29ca499a9c4a8825cb.jpg?x-oss-process=image/resize,w_1440/format,webp/quality,q_85/interlace,1" alt="Landscape photography">
+          <div class="photo-exif">FUJIFILM X-E4 | XF27mm F2.8 R WR | 27mm | f/5.6 | 1/1300s | ISO 320</div>
+        </div>
       </div>
-    </article>
-    <div class="prev">
-      <a href="#" hidefocus="true"></a>
     </div>
-    <div class="next">
-      <a href="#" hidefocus="true"></a>
+
+    <!-- Portrait -->
+    <div class="photo-subsection">
+      <h3 class="photo-subsection__title">Portrait</h3>
+      <div class="photo-grid--portrait">
+        <div class="photo-item photo-item--portrait">
+          <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/portrait/portrait-1.webp" alt="Portrait photography">
+          <div class="photo-exif">FUJIFILM X-E4 | XF27mm F2.8 R WR | 27mm | f/2.8 | 1/100s | ISO 1000</div>
+        </div>
+        <div class="photo-item photo-item--portrait">
+          <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/portrait/portrait-2.webp" alt="Portrait photography">
+          <div class="photo-exif">FUJIFILM X-E4 | XF35mm F1.4 R | 35mm | f/4.0 | 1/400s | ISO 160</div>
+        </div>
+        <div class="photo-item photo-item--portrait">
+          <img src="https://ifable-photography.oss-cn-beijing.aliyuncs.com/portrait/portrait-3.webp" alt="Portrait photography">
+          <div class="photo-exif">FUJIFILM GFX | GF110mm F2 R LM WR | 110mm | f/2.2 | 1/2000s | ISO 200</div>
+        </div>
+      </div>
     </div>
   </section>
-  <section id="more" class="hidden">
-    <p>快把我收到碗里吧<br>
-      <a href="mailto:&#99;&#104;&#97;&#110;&#103;&#106;&#117;&#110;&#104;&#97;&#111;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#x6d;" hideFocus="true">&#99;&#104;&#97;&#110;&#103;&#106;&#117;&#110;&#104;&#97;&#111;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#x6d;</a>
-    </p>
-    <div class="prev">
-      <a href="#" hidefocus="true"></a>
+
+  <div class="section__divider" style="margin: 0 var(--section-padding-x); width: auto;"></div>
+
+  <!-- Contact -->
+  <section class="section reveal" id="contact">
+    <div class="section__header">
+      <p class="section__kicker">03 — CONTACT</p>
+      <h2 class="section__title">Let's build something.</h2>
+    </div>
+    <div class="contact__content">
+      <p class="contact__desc">无论是技术合作、前端咨询，还是摄影邀约、商业拍摄，都欢迎来信。我通常在 24 小时内回复。</p>
+      <a href="mailto:changjunhao@outlook.com" class="email-cta">
+        <span class="email-cta__label">EMAIL</span>
+        <span class="email-cta__address">changjunhao@outlook.com</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://blog.ifable.cn" target="_blank" rel="noopener noreferrer">Blog</a></li>
+        <li><a href="https://github.com/changjunhao" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://500px.com.cn/ifable" target="_blank" rel="noopener noreferrer">500px</a></li>
+        <li><a href="#" id="douyin-trigger">抖音</a></li>
+      </ul>
     </div>
   </section>
-  <div class="copyright-text">© 2015-2020 ifable.cn 版权所有
-    <a href="http://beian.miit.gov.cn/" target="_blank">
-      晋ICP备13006493号
-    </a>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__wordmark">CHANG.JH</span>
+    <div class="footer__right">
+      <span class="footer__copy">2026 Chang Junhao. All rights reserved.</span>
+      <a class="footer__icp" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">晋ICP备13006493号</a>
+    </div>
+  </footer>
+
+  <!-- Douyin QR Modal -->
+  <div class="qr-modal" id="douyin-modal" aria-hidden="true" role="dialog" aria-label="抖音二维码">
+    <div class="qr-modal__backdrop" data-close></div>
+    <div class="qr-modal__card">
+      <button class="qr-modal__close" data-close aria-label="关闭">&times;</button>
+      <p class="qr-modal__label">DOUYIN</p>
+      <div class="qr-modal__image">
+        <img src="images/douyin-qrcode.jpg" alt="抖音二维码" onerror="this.style.display='none';document.getElementById('qr-placeholder').style.display='flex'">
+        <div class="qr-modal__placeholder" id="qr-placeholder" style="display:none;flex-direction:column;gap:8px;">
+          <span style="font-size:10px;">images/<br>douyin-qrcode.jpg</span>
+        </div>
+      </div>
+      <p class="qr-modal__hint">扫码关注我的抖音</p>
+    </div>
   </div>
-  <script src="javascripts/jquery-3.1.0.min.js"></script>
-  <script src="javascripts/jquery.particleground.min.js"></script>
-  <script src="javascripts/script.js"></script>
+
+</div>
+
+<!-- Scripts -->
+<script src="javascripts/main.js"></script>
 </body>
 </html>
