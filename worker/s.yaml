@@ -1,0 +1,68 @@
+# ============================================================
+# 求职 Agent 代理 · 阿里云函数计算 FC 3.0 部署配置(Serverless Devs)
+#
+# 等价于原 Cloudflare 的 wrangler.toml。用 Web 函数(自定义运行时)部署,
+# 因为只有 Web 函数支持 SSE 流式响应;内置 Node.js 20 直接起 HTTP Server。
+#
+# 部署:  s deploy -y      (需先 export LLM_API_KEY=...,见 README)
+# ============================================================
+edition: 3.0.0
+name: changjunhao-agent
+access: default            # 密钥别名,对应 `s config add` 时填的 alias
+
+resources:
+  agent:
+    component: fc3
+    props:
+      region: cn-hangzhou  # 可改:cn-shanghai / cn-beijing 等
+      functionName: changjunhao-agent
+      description: 求职 Agent 代理(保管 LLM Key + 注入知识库 + SSE 透传)
+      runtime: custom.debian10   # 该运行时内置 Node.js 20
+      handler: index.handler     # 自定义运行时占位,实际不使用
+      code: ./
+
+      # 自定义运行时启动命令:用内置 Node.js 20 起 index.js,监听 9000
+      customRuntimeConfig:
+        command:
+          - /var/fc/lang/nodejs20/bin/node
+        args:
+          - index.js
+        port: 9000
+
+      cpu: 0.5
+      memorySize: 512          # MB
+      diskSize: 512            # MB
+      timeout: 120             # 单次请求最长执行时间(秒),覆盖流式长回复
+      instanceConcurrency: 20  # 单实例并发,流式 I/O 密集型可调高省成本
+      internetAccess: true     # 必须开启,函数才能访问外网 LLM API
+
+      environmentVariables:
+        # ---- 模型服务商配置(OpenAI Chat Completions 兼容协议即可)----
+        # DeepSeek(默认,便宜好用)
+        LLM_BASE_URL: https://api.deepseek.com/v1
+        LLM_MODEL: deepseek-chat
+
+        # 备选:阿里云百炼(通义),取消下面两行注释并注释掉上面两行
+        # LLM_BASE_URL: https://dashscope.aliyuncs.com/compatible-mode/v1
+        # LLM_MODEL: qwen-plus
+
+        # 备选:Moonshot Kimi
+        # LLM_BASE_URL: https://api.moonshot.cn/v1
+        # LLM_MODEL: kimi-k2-0905-preview
+
+        # API Key 不写死在这里!从本地环境变量注入,不进 git:
+        #   export LLM_API_KEY=sk-xxxx   然后再 s deploy
+        LLM_API_KEY: ${env('LLM_API_KEY')}
+
+      triggers:
+        - triggerName: httpTrigger
+          triggerType: http
+          qualifier: LATEST
+          triggerConfig:
+            authType: anonymous        # 公网匿名可访问(由 CORS + 限流兜底)
+            disableURLInternet: false  # 开启公网访问 URL(fcapp.run)
+            methods:
+              - GET
+              - POST
+              - OPTIONS
+              - HEAD

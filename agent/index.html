@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="4EuXKBHAyO5GqKvuYt1VNk">
+<head data-page-node-id="AksJdIT79SbaFx1CUTfS74">
+  <meta charset="UTF-8" data-page-node-id="g1n0fNUfiwAXJcjE1WZ4gR">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="hprfDuiUTai3dPwuhxfLdH">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" data-page-node-id="tDncdqZSHgmMvLOTPPehEh">
+  <title>Ask AI — CHANG.JH · 常君豪的 AI 求职助手</title>
+  <meta name="description" content="常君豪的 AI 求职助手:基于公开简历与项目资料,7×24 回答招聘方的问题。" data-page-node-id="5SOifXAUEeoGiOhQMof7n0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.cn" data-page-node-id="YGbg7GdDe7nqa7w6NdNO2p">
+  <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin data-page-node-id="Vw6QYfda8u3gps0BoI7Xjz">
+  <link href="https://fonts.googleapis.cn/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet" data-page-node-id="BPrDyn0a59YEsXLzUHOiPg">
+
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --bg-card: #0F0F0F;
+      --bg-input: #141414;
+      --text-primary: #FAFAFA;
+      --text-secondary: rgba(250,250,250,0.65);
+      --text-muted: rgba(250,250,250,0.45);
+      --accent: #C49A4A;
+      --accent-hover: #D4A85A;
+      --border-subtle: #1F1F1F;
+      --border-strong: #2F2F2F;
+      --font-display: 'Cormorant Garamond', 'Noto Serif SC', serif;
+      --font-body: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Nav — 与主站一致 */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 64px;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav__wordmark { font-family: var(--font-mono); font-weight: 500; font-size: 15px; letter-spacing: -0.02em; }
+    .nav__links { display: flex; gap: 36px; align-items: center; list-style: none; }
+    .nav__links a { font-size: 14px; color: var(--text-secondary); transition: color 0.2s ease; }
+    .nav__links a:hover { color: var(--text-primary); }
+    .nav__links a.active { color: var(--accent); font-weight: 500; }
+
+    /* Ask AI nav badge — gold pill + twinkling spark (与主站一致) */
+    .nav__ai {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 999px;
+      border: 1px solid rgba(196,154,74,0.45);
+      background: rgba(196,154,74,0.10);
+      white-space: nowrap;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav__links a.nav__ai { color: var(--accent); font-weight: 500; }
+    .nav__links a.nav__ai:hover {
+      color: var(--accent);
+      background: rgba(196,154,74,0.18);
+      border-color: rgba(196,154,74,0.8);
+      box-shadow: 0 0 16px rgba(196,154,74,0.25);
+    }
+    .nav__ai-spark { color: var(--accent); animation: aiSparkTwinkle 2.4s ease-in-out infinite; }
+    @keyframes aiSparkTwinkle {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) { .nav__ai-spark { animation: none; } }
+
+    /* Layout */
+    .layout {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 128px 64px 40px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Intro */
+    .intro { position: sticky; top: 128px; display: flex; flex-direction: column; gap: 24px; }
+    .kicker {
+      font-family: var(--font-mono); font-size: 12px; color: var(--accent);
+      letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .headline {
+      font-family: var(--font-display); font-style: italic; font-weight: 300;
+      font-size: 56px; line-height: 1.05; letter-spacing: -0.01em;
+    }
+    .headline em { color: var(--accent); }
+    .intro__sub { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+    .intro__note {
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+      line-height: 1.8; border-top: 1px solid var(--border-subtle); padding-top: 20px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 7px 13px;
+      border-radius: 4px;
+      background: #1A1A1A;
+      border: 1px solid transparent;
+      font-family: var(--font-mono); font-size: 12px; color: var(--accent);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .chip:hover { border-color: var(--accent); background: rgba(196,154,74,0.08); }
+
+    /* Chat */
+    .chat {
+      display: flex; flex-direction: column;
+      height: calc(100vh - 220px);
+      min-height: 520px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .chat__scroll { flex: 1; overflow-y: auto; padding: 28px; scroll-behavior: smooth; }
+    .chat__scroll::-webkit-scrollbar { width: 6px; }
+    .chat__scroll::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+    .msg { display: flex; margin-bottom: 20px; }
+    .msg--user { justify-content: flex-end; }
+    .msg__bubble {
+      max-width: 82%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.75;
+      word-break: break-word;
+    }
+    .msg--user .msg__bubble {
+      background: var(--accent);
+      color: #0A0A0A;
+      border-bottom-right-radius: 4px;
+    }
+    .msg--ai .msg__bubble {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      border-bottom-left-radius: 4px;
+    }
+    .msg__bubble a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .msg--user .msg__bubble a { color: #0A0A0A; }
+    .msg__bubble strong { font-weight: 600; }
+    .msg__bubble code {
+      font-family: var(--font-mono); font-size: 13px;
+      background: rgba(196,154,74,0.12); color: var(--accent);
+      padding: 1px 6px; border-radius: 4px;
+    }
+    .msg__bubble ul { margin: 6px 0 6px 18px; }
+    .msg__bubble li { margin-bottom: 4px; }
+    .msg__bubble p + p { margin-top: 8px; }
+    .msg__bubble.streaming::after {
+      content: "▍";
+      color: var(--accent);
+      animation: blink 0.9s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .typing { display: inline-flex; gap: 5px; padding: 4px 2px; }
+    .typing i {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); opacity: 0.35;
+      animation: typing 1.2s ease-in-out infinite;
+    }
+    .typing i:nth-child(2) { animation-delay: 0.15s; }
+    .typing i:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes typing { 0%, 60%, 100% { opacity: 0.35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+    /* Composer */
+    .composer {
+      display: flex; align-items: flex-end; gap: 12px;
+      padding: 16px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+    }
+    .composer textarea {
+      flex: 1;
+      background: var(--bg-input);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+      padding: 11px 14px;
+      resize: none;
+      max-height: 140px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .composer textarea:focus { border-color: var(--accent); }
+    .composer textarea::placeholder { color: var(--text-muted); }
+    .composer button {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border: none; border-radius: 12px;
+      background: var(--accent);
+      color: #0A0A0A;
+      cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    }
+    .composer button:hover:not(:disabled) { background: var(--accent-hover); transform: translateY(-1px); }
+    .composer button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .footer {
+      padding: 24px;
+      text-align: center;
+      font-family: var(--font-mono); font-size: 12px;
+      color: rgba(250,250,250,0.35);
+    }
+    .footer a { transition: color 0.2s ease; }
+    .footer a:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      /* Two-row nav: wordmark on top, wrapping links below */
+      .nav {
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 24px 14px;
+      }
+      .nav__links { gap: 12px; flex-wrap: wrap; }
+      .nav__links a { font-size: 12px; }
+      .nav__ai { padding: 6px 11px; gap: 5px; }
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 128px 20px 24px;
+      }
+      .intro { position: static; gap: 16px; }
+      .headline { font-size: 38px; }
+      .intro__note { display: none; }
+      .chat { height: calc(100dvh - 320px); min-height: 380px; }
+      .chat__scroll { padding: 18px; }
+      .msg__bubble { max-width: 90%; }
+    }
+  </style>
+</head>
+<body data-page-node-id="phF4YMsWThz0xCNEvdQhjK">
+
+<nav class="nav" data-page-node-id="Zq05DZuiAzzSCZmTnnl8Yu">
+  <a href="../" class="nav__wordmark" data-page-node-id="J030mTfNTMDIq1YVBomJNm">CHANG.JH</a>
+  <ul class="nav__links" data-page-node-id="RXLlZBEMBcNOeNRu8QwVdB">
+    <li data-page-node-id="L1b5fCya1E3PZ5NSA6eawd"><a href="../#about" data-page-node-id="2J74Us0wuofIDtqAwMz8mJ">About</a></li>
+    <li data-page-node-id="yX86zWJ262YcAr4houcRPl"><a href="../#photography" data-page-node-id="n6IioNsn4qPfQKu8s5hy1i">Photography</a></li>
+    <li data-page-node-id="p81JOQD3W6IH3LptTYqSFO"><a href="https://blog.ifable.cn" target="_blank" rel="noopener noreferrer" data-page-node-id="z1zHhopH6szPEk93BtWT3J">Blog</a></li>
+    <li><a href="../#contact">Contact</a></li>
+    <li data-page-node-id="qcAGzfOxXdQuEyQtLflDMl"><a href="./" class="active nav__ai" data-page-node-id="gRJZmqOcAJ8UA4zT7cDuMH">
+      <svg class="nav__ai-spark" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C12.6 7.5 16.5 11.4 22 12C16.5 12.6 12.6 16.5 12 22C11.4 16.5 7.5 12.6 2 12C7.5 11.4 11.4 7.5 12 2Z"/></svg>
+      <span>Ask AI</span>
+    </a></li>
+  </ul>
+</nav>
+
+<main class="layout" data-page-node-id="Q58SXj6j2PQ6L3lk8aOROZ">
+  <aside class="intro" data-page-node-id="Fsg7LReEc9ccBaZfQAQrJf">
+    <p class="kicker" data-page-node-id="Ban8f7yioH9sHUFL7OzY4g">AI Assistant</p>
+    <h1 class="headline" data-page-node-id="fVwgR8oGoFpzcNDyCY2v7m">Ask me<br data-page-node-id="j3ZBokIHPgeA3GmFicFSaV"><em data-page-node-id="k3KlQOnTz6f7VFwQuWZpyd">anything.</em></h1>
+    <p class="intro__sub" data-page-node-id="eaLFm2o1XAyWuslqROldI5">
+      我是常君豪的 AI 求职助手,基于他的公开简历与项目资料运行。
+      可以直接问我他的项目经验、技术栈、工作履历——比简历更详细,比等待回复更快。
+    </p>
+    <div class="chips" id="chips" data-page-node-id="h2pdg24Dvw7GQZnFddT0el">
+      <button class="chip" type="button" data-page-node-id="fhHxOuNEt9XE706Ieapa8D">介绍一下 Venus 项目</button>
+      <button class="chip" type="button" data-page-node-id="RB8NcysOCSrGqXOHQos1wj">均瑜的 Monorepo 收口怎么做的?</button>
+      <button class="chip" type="button" data-page-node-id="RELk5b9drXvmbTRHf5CPiz">讲讲美秒的分布式采集系统</button>
+      <button class="chip" type="button" data-page-node-id="lfX8g5zpF0psLJxLMWqNfr">最近四年为什么没做服务端?</button>
+      <button class="chip" type="button" data-page-node-id="LsVFsp8mfAAkXdiDfk1hgL">他带团队吗?管理经验?</button>
+      <button class="chip" type="button" data-page-node-id="ZzVL9mmGU3aHyI68FrFzNh">怎么联系他本人?</button>
+    </div>
+    <p class="intro__note" data-page-node-id="XPj3yQ0hHyINjbanbOIn2S">
+      // 回答基于公开简历资料生成,仅供参考;<br data-page-node-id="D23YAtnpbIVErebUfpaZlq">
+      // 重要信息请以简历与面试沟通为准。
+    </p>
+  </aside>
+
+  <section class="chat" aria-label="AI 对话" data-page-node-id="UOsSWBMzn8dZUPDKfhAftY">
+    <div class="chat__scroll" id="scroll" data-page-node-id="D1gRKDCju7c0pfBZo7Mili">
+      <div id="messages" data-page-node-id="GHKLfPTAOr8reVg4erhwj7"></div>
+    </div>
+    <form class="composer" id="composer" data-page-node-id="tZfJOsUEUBJlg8PZKfuRBL">
+      <textarea id="input" rows="1" placeholder="问点什么,比如:他做过组件库吗?" aria-label="输入问题"></textarea>
+      <button type="submit" id="send" aria-label="发送" data-page-node-id="a2f7SUsvR8rDishAHgUbFX">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="YeWvWiCOWlzrlQsOpg099h"><path d="M12 19V5" data-page-node-id="ipAdv7qLAgJ0HSC7dfrtKS"/><path d="M5 12l7-7 7 7" data-page-node-id="GkJ43uMsmB9z5BBfRRJeL3"/></svg>
+      </button>
+    </form>
+  </section>
+</main>
+
+<footer class="footer" data-page-node-id="Jq1JkMkLjPJNC1XfqFaKRN">
+  <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" data-page-node-id="1T7Y6jaeDkCZz63atBF4pg">晋ICP备13006493号</a>
+</footer>
+
+<script>
+/* ============================================================
+ * 配置:阿里云函数计算(FC)部署完成后,把函数访问地址填到这里。
+ * 例如:const AGENT_API_URL = "https://changjunhao-agent-xxxx.cn-hangzhou.fcapp.run/chat";
+ * 留空时页面可正常浏览,发送消息会提示尚未接入后端。
+ * ============================================================ */
+const AGENT_API_URL = "https://jh-agent-xwcmmozjew.cn-beijing.fcapp.run/chat";
+
+const WELCOME = "你好,我是常君豪的 AI 求职助手。\n\n他的简历只能装下两页,我可以讲得更多:项目里的技术决策、踩过的坑、带团队的方式……想从哪里聊起?也可以直接点左边的预设问题。";
+
+const messagesEl = document.getElementById("messages");
+const scrollEl = document.getElementById("scroll");
+const composerEl = document.getElementById("composer");
+const inputEl = document.getElementById("input");
+const sendEl = document.getElementById("send");
+
+const history = []; // {role: "user"|"assistant", content: string}
+let streaming = false;
+let abortCtrl = null;
+
+/* ---------- 极简 Markdown 渲染(加粗 / 行内代码 / 链接 / 列表) ---------- */
+function renderMarkdown(text) {
+  const esc = text
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const inline = (s) => s
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+    .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+  const blocks = [];
+  let listBuf = [];
+  for (const rawLine of esc.split("\n")) {
+    const line = rawLine.trimEnd();
+    const m = line.match(/^\s*[-*]\s+(.*)$/);
+    if (m) { listBuf.push("<li>" + inline(m[1]) + "</li>"); continue; }
+    if (listBuf.length) { blocks.push("<ul>" + listBuf.join("") + "</ul>"); listBuf = []; }
+    if (line.trim() === "") { blocks.push(""); continue; }
+    blocks.push("<p>" + inline(line) + "</p>");
+  }
+  if (listBuf.length) blocks.push("<ul>" + listBuf.join("") + "</ul>");
+  return blocks.join("\n").replace(/\n{2,}/g, "\n");
+}
+
+/* ---------- DOM ---------- */
+function addBubble(role) {
+  const row = document.createElement("div");
+  row.className = "msg " + (role === "user" ? "msg--user" : "msg--ai");
+  const bubble = document.createElement("div");
+  bubble.className = "msg__bubble";
+  row.appendChild(bubble);
+  messagesEl.appendChild(row);
+  scrollEl.scrollTop = scrollEl.scrollHeight;
+  return bubble;
+}
+
+function setBubble(bubble, text, stream) {
+  bubble.innerHTML = renderMarkdown(text);
+  bubble.classList.toggle("streaming", !!stream);
+  scrollEl.scrollTop = scrollEl.scrollHeight;
+}
+
+function autoresize() {
+  inputEl.style.height = "auto";
+  inputEl.style.height = Math.min(inputEl.scrollHeight, 140) + "px";
+}
+inputEl.addEventListener("input", autoresize);
+inputEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+    e.preventDefault();
+    composerEl.requestSubmit();
+  }
+});
+
+document.getElementById("chips").addEventListener("click", (e) => {
+  const chip = e.target.closest(".chip");
+  if (!chip || streaming) return;
+  send(chip.textContent.trim());
+});
+
+composerEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = inputEl.value.trim();
+  if (!text || streaming) return;
+  send(text);
+});
+
+/* ---------- 发送与流式接收 ---------- */
+async function send(text) {
+  streaming = true;
+  sendEl.disabled = true;
+  inputEl.value = "";
+  autoresize();
+
+  history.push({ role: "user", content: text });
+  addBubble("user").textContent = text;
+
+  const bubble = addBubble("assistant");
+  bubble.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+
+  if (!AGENT_API_URL) {
+    setBubble(bubble, "后端尚未接入:站长还没部署云函数。如果你是站长本人,请按 worker/README.md 部署后,把地址填进本页的 AGENT_API_URL。", false);
+    finish(); return;
+  }
+
+  abortCtrl = new AbortController();
+  let answer = "";
+
+  try {
+    const resp = await fetch(AGENT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history.slice(-12) }),
+      signal: abortCtrl.signal,
+    });
+
+    if (!resp.ok) {
+      const errText = await resp.text().catch(() => "");
+      throw new Error("HTTP " + resp.status + (errText ? " · " + errText.slice(0, 120) : ""));
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let firstChunk = true;
+
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+
+      let idx;
+      while ((idx = buffer.indexOf("\n\n")) >= 0) {
+        const event = buffer.slice(0, idx);
+        buffer = buffer.slice(idx + 2);
+        for (const line of event.split("\n")) {
+          if (!line.startsWith("data:")) continue;
+          const payload = line.slice(5).trim();
+          if (payload === "[DONE]") { buffer = ""; break; }
+          try {
+            const json = JSON.parse(payload);
+            const delta = json.choices && json.choices[0] && json.choices[0].delta;
+            if (delta && delta.content) {
+              if (firstChunk) { bubble.innerHTML = ""; firstChunk = false; }
+              answer += delta.content;
+              setBubble(bubble, answer, true);
+            }
+          } catch (_) { /* 忽略不完整的行 */ }
+        }
+      }
+    }
+    if (!answer) throw new Error("空响应");
+    setBubble(bubble, answer, false);
+    history.push({ role: "assistant", content: answer });
+  } catch (err) {
+    if (err.name === "AbortError") {
+      setBubble(bubble, answer || "(已停止)", false);
+    } else {
+      setBubble(bubble, "出了点问题,没能让 AI 开口(" + err.message + ")。\n\n也可以直接邮件联系他本人:[changjunhao@outlook.com](mailto:changjunhao@outlook.com)。", false);
+    }
+  }
+  finish();
+}
+
+function finish() {
+  streaming = false;
+  sendEl.disabled = false;
+  inputEl.focus();
+}
+
+/* ---------- 开场白 ---------- */
+addBubble("assistant");
+setBubble(messagesEl.lastChild.querySelector(".msg__bubble"), WELCOME, false);
+inputEl.focus();
+</script>
+</body>
+</html>

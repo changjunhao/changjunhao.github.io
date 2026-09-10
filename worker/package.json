@@ -1,0 +1,10 @@
+{
+  "name": "changjunhao-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "求职 Agent 代理 · 阿里云函数计算 FC 3.0 Web 函数(保管 LLM Key + 注入知识库 + SSE 透传)",
+  "scripts": {
+    "start": "node index.js"
+  }
+}

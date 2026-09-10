@@ -1,0 +1,4 @@
+# 部署时排除与运行无关的文件,减小代码包体积
+README.md
+s.yaml
+.fcignore
