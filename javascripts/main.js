@@ -63,8 +63,6 @@
   // ----------------------------------------------------------
   // Smooth scroll for anchor links
   // ----------------------------------------------------------
-  const NAV_OFFSET = 80;
-
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
@@ -75,7 +73,7 @@
 
       e.preventDefault();
       const targetPos =
-        target.getBoundingClientRect().top + window.pageYOffset - NAV_OFFSET;
+        target.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight;
       window.scrollTo({ top: targetPos, behavior: 'smooth' });
     });
   });
@@ -116,4 +114,23 @@
       closeModal();
     }
   });
+
+  // ----------------------------------------------------------
+  // Ask AI floating button — step aside when the footer is in
+  // view, keeping the ICP filing link unobstructed at the bottom
+  // ----------------------------------------------------------
+  const fabDock = document.querySelector('.ai-fab-dock');
+  const footer = document.querySelector('.footer');
+
+  if (fabDock && footer) {
+    const footerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          fabDock.classList.toggle('is-hidden', entry.isIntersecting);
+        });
+      },
+      { threshold: 0 }
+    );
+    footerObserver.observe(footer);
+  }
 })();
