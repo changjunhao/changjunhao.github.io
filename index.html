@@ -21,7 +21,9 @@
   <a href="#hero" class="nav__wordmark">CHANG.JH</a>
   <ul class="nav__links">
     <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
     <li><a href="#photography">Photography</a></li>
+    <li><a href="#journal">Journal</a></li>
     <li><a href="https://blog.ifable.cn" target="_blank" rel="noopener noreferrer">Blog</a></li>
     <li><a href="#contact" class="active">Contact</a></li>
     <li><a href="agent/" class="nav__ai">
@@ -77,10 +79,46 @@
     </div>
   </section>
 
+  <!-- Work -->
+  <section class="section reveal" id="work">
+    <div class="section__header">
+      <p class="section__kicker">02 — WORK</p>
+      <h2 class="section__title">Selected work.</h2>
+    </div>
+    <div class="work__cards">
+      <article class="project-card">
+        <div class="project-card__image">
+          <img class="project-card__image-bg" src="images/work-venus.jpg" alt="Venus — 多智能体摄影评审系统" loading="lazy">
+        </div>
+        <div class="project-card__text">
+          <h3 class="project-card__title">Venus — 多智能体摄影评审系统</h3>
+          <p class="project-card__desc">
+            一个让 AI 摄影评分「接受质疑」的评估引擎：初评者打分、批判者对照标准质疑、仲裁者裁决，全过程留痕可查。核心抽离为可复用 SDK，支持多模型 Provider、动态 Zod Schema 校验与 SSE / NDJSON 流式交付。
+          </p>
+          <p class="project-card__tags">TypeScript / Multi-Agent / VLM / Zod / SSE</p>
+          <a class="project-card__link" href="https://blog.ifable.cn/2026/06/13/venus-ai-photography-evaluation/" target="_blank" rel="noopener noreferrer">Read the story &rarr;</a>
+        </div>
+      </article>
+      <article class="project-card project-card--reverse">
+        <div class="project-card__image">
+          <img class="project-card__image-bg" src="images/work-monorepo.jpg" alt="企业级前端 Monorepo 架构" loading="lazy">
+        </div>
+        <div class="project-card__text">
+          <h3 class="project-card__title">企业级前端 Monorepo 架构</h3>
+          <p class="project-card__desc">
+            从单体仓库到 10 个子应用独立部署的架构实践：pnpm workspace + 源码直引，6 个共享包统一工程能力，子应用保留独立构建与发布边界，并持续治理依赖与宿主约定。
+          </p>
+          <p class="project-card__tags">pnpm workspace / UmiJS 4 / React 18 / Tailwind CSS</p>
+          <a class="project-card__link" href="https://blog.ifable.cn/2024/12/29/enterprise-monorepo-architecture/" target="_blank" rel="noopener noreferrer">Read the story &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <!-- Photography -->
   <section class="section reveal" id="photography">
     <div class="section__header">
-      <p class="section__kicker">02 — PHOTOGRAPHY</p>
+      <p class="section__kicker">03 — PHOTOGRAPHY</p>
       <h2 class="section__title">Light and shadow.</h2>
     </div>
 
@@ -125,10 +163,58 @@
 
   <div class="section__divider" style="margin: 0 var(--section-padding-x); width: auto;"></div>
 
+  <!-- Journal -->
+  <section class="section reveal" id="journal">
+    <div class="section__header">
+      <p class="section__kicker">04 — JOURNAL</p>
+      <h2 class="section__title">Notes and essays.</h2>
+    </div>
+    <div class="journal__grid">
+      <a class="journal-card" href="https://blog.ifable.cn/2026/06/14/venus-ai-photography-engineering/" target="_blank" rel="noopener noreferrer">
+        <div class="journal-card__meta">
+          <span class="journal-card__category">AI Agent</span>
+          <span>2026-06-14</span>
+        </div>
+        <h3 class="journal-card__title">把多智能体评审做成可复用引擎：Venus 的工程实践</h3>
+        <p class="journal-card__excerpt">从 Express 原型抽离 Venus Core：Provider 显式注入、动态 Zod Schema、增量 JSON 解析与流式事件的工程取舍。</p>
+        <span class="journal-card__link">Read article &rarr;</span>
+      </a>
+      <a class="journal-card" href="https://blog.ifable.cn/2026/06/13/venus-ai-photography-evaluation/" target="_blank" rel="noopener noreferrer">
+        <div class="journal-card__meta">
+          <span class="journal-card__category">AI Agent</span>
+          <span>2026-06-13</span>
+        </div>
+        <h3 class="journal-card__title">让 AI 的摄影评分接受质疑：Venus 的多智能体评审实践</h3>
+        <p class="journal-card__excerpt">从 Apple Vision、NIMA、MUSIQ 转向 VLM：场景化摄影标准与初评—质疑—裁决的对抗评审流程设计。</p>
+        <span class="journal-card__link">Read article &rarr;</span>
+      </a>
+      <a class="journal-card" href="https://blog.ifable.cn/2024/12/29/enterprise-monorepo-architecture/" target="_blank" rel="noopener noreferrer">
+        <div class="journal-card__meta">
+          <span class="journal-card__category">前端架构</span>
+          <span>2024-12-29</span>
+        </div>
+        <h3 class="journal-card__title">从单体仓库到 10 个子应用独立部署——大型企业级前端 Monorepo 架构设计与实践</h3>
+        <p class="journal-card__excerpt">10 应用 + 6 共享包的 pnpm workspace：源码直引、独立构建部署、权限初始化与依赖治理。</p>
+        <span class="journal-card__link">Read article &rarr;</span>
+      </a>
+      <a class="journal-card" href="https://blog.ifable.cn/2021/11/06/mongo-transaction/" target="_blank" rel="noopener noreferrer">
+        <div class="journal-card__meta">
+          <span class="journal-card__category">MongoDB</span>
+          <span>2021-11-06</span>
+        </div>
+        <h3 class="journal-card__title">在 Golang 中使用 MongoDB 事务支持</h3>
+        <p class="journal-card__excerpt">借助多文档事务实现跨集合的自增 ID：副本集搭建、UseSession 与 StartTransaction 的完整实践。</p>
+        <span class="journal-card__link">Read article &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="section__divider" style="margin: 0 var(--section-padding-x); width: auto;"></div>
+
   <!-- Contact -->
   <section class="section reveal" id="contact">
     <div class="section__header">
-      <p class="section__kicker">03 — CONTACT</p>
+      <p class="section__kicker">05 — CONTACT</p>
       <h2 class="section__title">Let's build something.</h2>
     </div>
     <div class="contact__content">
